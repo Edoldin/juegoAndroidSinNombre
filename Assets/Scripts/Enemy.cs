@@ -2,25 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
-    protected Rigidbody2D rg;
-    public float hp;
-    public float speed;
+    public    Transform    player;
+    protected UnityEngine.AI.NavMeshAgent enemy;
+
+    [SerializeField] protected Rigidbody rg;
+    [SerializeField] protected int         hp;
+    [SerializeField] protected int         damage;
+    [SerializeField] protected float       speed;
+    [SerializeField] protected float       attackSpeed;
 
     protected virtual void Awake()
     {
-        rg = GetComponent<Rigidbody2D>();
+        rg = GetComponent<Rigidbody>();
+        enemy = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
-    void Start()
+    protected virtual void Move()
     {
-        
     }
 
-    void Update()
+    protected virtual void Attack()
     {
-        
+    }
+
+    protected virtual void SetStats(int hp, int damage, float speed, float attackSpeed)
+    {
+        this.hp = hp;
+        this.damage = damage; 
+        this.speed = speed;
+        this.attackSpeed = attackSpeed;
     }
 
     public Vector2 getPos()
